@@ -1,0 +1,24 @@
+MouseTester - Terms of Use
+
+Copyright (c) 2026 Aleksandar Krstic. All rights reserved.
+
+MouseTester ("the Software") is provided free of charge, as-is.
+
+You MAY:
+  - Use the Software on your own machines, free of charge, for personal or
+    commercial purposes.
+  - Share the original, unmodified release archive with others.
+
+You MAY NOT:
+  - Sell the Software or charge others for access to it.
+  - Modify, decompile, reverse-engineer, or redistribute modified versions.
+
+NO WARRANTY. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT
+OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+The optional power-management features change Windows power settings only after
+you explicitly confirm, and provide a restore option. You use them at your own
+risk.
