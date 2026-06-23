@@ -27,12 +27,20 @@ An 8000 Hz mouse that delivers raggedly can score *below* a rock-steady 4000 Hz 
 
 Verify your download against the `SHA256` value listed on the release.
 
-> The build is **not code-signed yet**, so Windows SmartScreen may warn on first run ("More info" → "Run anyway"). Signing is planned.
+> On first run, Windows SmartScreen may say "Windows protected your PC" — because this is a small, free, **unsigned** tool, not because it's malware. Click **More info → Run anyway**. (See [Is it safe?](#is-it-safe) below for why, and how to verify it yourself.)
 
-## Privacy & what it touches
+## Is it safe?
 
-- Reads **raw mouse input locally** to measure timing. **No network, no telemetry — nothing leaves your PC.** Test history is stored only in your Documents folder.
-- The optional power-saving changes require **admin** (a UAC prompt), are shown to you first, and are **reversible** ("Restore settings"). Nothing is changed without you clicking.
+Short version: yes — and you don't have to take my word for it.
+
+- **Why the SmartScreen warning?** MouseTester is a free tool I don't earn anything from, so it isn't code-signed (a signing certificate costs money and needs a registered company — not worth it for a free project). **Unsigned ≠ unsafe** — it only means Windows doesn't recognise the publisher yet. The warning fades as more people run it.
+- **No network, no telemetry.** It reads raw mouse input **locally** to measure timing — **nothing leaves your PC**, no internet calls, no tracking. Test history is stored only in your Documents folder.
+- **The optional power-saving changes** require **admin** (a UAC prompt), are shown to you first, and are fully **reversible** ("Restore settings"). Nothing changes unless you click.
+
+**Don't trust me — verify:**
+- Check the download's **SHA256** against the value on the release.
+- Drag the `.zip` onto [**VirusTotal**](https://www.virustotal.com) to scan it with 70+ antivirus engines yourself.
+- Block it in a firewall if you like — it never needs the internet.
 
 ## Status
 
