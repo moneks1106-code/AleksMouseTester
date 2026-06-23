@@ -9,7 +9,7 @@ Most mouse testers show you a polling-rate number. MouseTester measures somethin
 ## What it does
 
 - **Quick Test** — move the mouse for a few seconds, get a plain-language delivery score.
-- **Advanced / Lab** — the full metric breakdown (jitter, worst gap, stutters, batching, on-target share…), a live interval graph, and the raw numbers behind the score.
+- **Advanced / Lab** — the full metric breakdown (jitter, worst gap, stutters, batching, on-target share…), a live interval graph (**double-click it for a full-screen view** with zoom + labeled axes; Esc closes), and the raw numbers behind the score.
 - **Compare** — every run is saved locally and ranked, so you can find your **sweet spot: the highest rate that still delivers cleanly** (higher Hz isn't automatically better). Testing several USB ports? Compare them side by side.
 - **Power-saving check** — optionally scan the Windows power-saving settings that can interrupt input delivery (USB selective suspend, CPU states, per-device USB power management) and switch them to max performance — fully reversible.
 
