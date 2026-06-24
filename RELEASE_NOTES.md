@@ -1,9 +1,9 @@
-## MouseTester v0.2.8
+## MouseTester v0.2.9
 
 ### What's new in this version
-- **Better across monitor resolutions.** The app now opens **maximized**, so the graph has real room on smaller / Full-HD (1080p) screens — the earlier default window left it cramped.
-- **Full-screen graph.** **Double-click** any graph to open it full screen. It keeps the scroll-wheel **zoom** and adds dropdowns to switch the graph / X-axis. Press **Esc** (or double-click again) to close it.
-- **Labeled axes** in the full-screen graph — titled X and Y axes with the exact value ticks (there's finally room for them at full size).
+- **Open any past run.** On the **Compare** page, **double-click a run** to load it back into the full UI — its values, ratings, score breakdown, metric band, and graphs. New runs store a compact trace so the **time-series graphs reload too**; older runs (recorded before this version) show the saved distribution graph.
+- **Fix: correct reference line when switching runs.** The red target line on the Timing-Distribution graph used to keep the *previous* run's rate when you clicked between saved runs. It now always follows the loaded run's own target Hz.
+- **Lighter on your system while measuring.** Reduced the app's own overhead during a capture — higher-priority capture thread, garbage-collection pauses suppressed for the measurement window, fewer lock reads, and no redundant post-capture passes. An honest measurement tool should disturb the very timing it measures as little as possible; this matters most at 8000 Hz.
 
 ---
 
@@ -12,12 +12,12 @@ A free Windows tool that measures how **evenly** your mouse's input is delivered
 ### Highlights
 - **Quick Test** with a plain-language delivery score
 - **Advanced / Lab** metrics + a live interval graph (double-click it for a labeled full-screen view)
-- **Compare** your runs and find your **stable sweet-spot rate** (higher Hz isn't automatically better)
+- **Compare** your runs, find your **stable sweet-spot rate** (higher Hz isn't automatically better), and **double-click any run to reopen it** — values, ratings, and graphs
 - Optional **power-saving check / disable / restore** (reversible, admin-gated)
 
 ### Download
-- `MouseTester-v0.2.8-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed)
-- SHA256: `bd5ecb07c5a2db80a8f55708d45473db18d8fdd1468ab59713f6f78d7242aa27`
+- `MouseTester-v0.2.9-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed)
+- SHA256: `a0b48d6b3f2a83efac4ce8d1cee9ca454e41ba0d8b7d80d4157a9844d4ff0210`
 
 Unzip (keep the whole folder) and run `MouseTester.exe`.
 
