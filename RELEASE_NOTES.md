@@ -1,9 +1,13 @@
-## MouseTester v0.2.9
+## MouseTester v0.2.10
 
-### What's new in this version
-- **Open any past run.** On the **Compare** page, **double-click a run** to load it back into the full UI — its values, ratings, score breakdown, metric band, and graphs. New runs store a compact trace so the **time-series graphs reload too**; older runs (recorded before this version) show the saved distribution graph.
-- **Fix: correct reference line when switching runs.** The red target line on the Timing-Distribution graph used to keep the *previous* run's rate when you clicked between saved runs. It now always follows the loaded run's own target Hz.
-- **Lighter on your system while measuring.** Reduced the app's own overhead during a capture — higher-priority capture thread, garbage-collection pauses suppressed for the measurement window, fewer lock reads, and no redundant post-capture passes. An honest measurement tool should disturb the very timing it measures as little as possible; this matters most at 8000 Hz.
+A fix-focused release — mostly things that keep the tool *honest about itself*.
+
+### What's fixed
+- **The "sweet spot" recommendation is now honest.** Compare ranks each rate by its **typical** (median) delivery across your runs, so it points you to the rate that's *consistently* clean — not the highest rate that happened to nail it once. On a system where 8000 Hz is sometimes great but often stutters, it now correctly recommends the steadier rate (the whole point: the highest **stable** rate, not the highest number).
+- **Per-mouse USB power saving now reads the real state.** The "Check power saving" panel used to show a stale **"On"** for your mouse even after you disabled it (a custom power plan could trigger this). It now reads the exact same Windows state it writes, **verifies** the change actually took effect (no more false "done"), refreshes the panel immediately, and shows **"Mixed"** when a composite mouse's interfaces disagree.
+- **Reopened runs no longer hide their worst spike.** Double-clicking a saved run on the Compare page now always shows its **worst gap and worst batch** in the graphs — the earlier downsampling could drop the single biggest outlier, and a saved graph should never look cleaner than the real run.
+- **Power tweaks are truly reversible.** The optional power tweak now changes **nothing** if it can't save a restore point first, so "Restore settings" always has something to restore.
+- **The tool stays out of its own measurement.** Power-saving actions are blocked while a test or capture is running, so checking/changing power settings can never disturb a live reading.
 
 ---
 
@@ -16,12 +20,12 @@ A free Windows tool that measures how **evenly** your mouse's input is delivered
 - Optional **power-saving check / disable / restore** (reversible, admin-gated)
 
 ### Download
-- `MouseTester-v0.2.9-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed)
-- SHA256: `a0b48d6b3f2a83efac4ce8d1cee9ca454e41ba0d8b7d80d4157a9844d4ff0210`
+- `MouseTester-v0.2.10-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed)
+- SHA256: `d499e35e50596f2ac0e0e22bb3449e199b0683097f39b7aeb09b61a54d52e3c1`
 
 Unzip (keep the whole folder) and run `MouseTester.exe`.
 
-> Not code-signed yet — Windows SmartScreen may warn on first run ("More info" → "Run anyway"). Signing is planned.
+> Not code-signed yet — Windows SmartScreen may warn on first run ("More info" → "Run anyway"). Signing is planned. See **How this was built** in the README for AI-assistance, closed-source status, and what the SHA-256 does and doesn't prove.
 
 ### Honest status
 Internally credible, **not yet validated across many mice / PCs**. Feedback from different hardware is very welcome.
