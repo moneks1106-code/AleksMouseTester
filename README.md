@@ -38,9 +38,18 @@ Short version: yes — and you don't have to take my word for it.
 - **The optional power-saving changes** require **admin** (a UAC prompt), are shown to you first, and are fully **reversible** ("Restore settings"). Nothing changes unless you click.
 
 **Don't trust me — verify:**
-- Check the download's **SHA256** against the value on the release.
+- Check the download's **SHA256** matches the release — it confirms you got my exact, untampered file (for what the hash *can't* prove, see [How this was built](#how-this-was-built-transparency)).
 - Drag the `.zip` onto [**VirusTotal**](https://www.virustotal.com) to scan it with 70+ antivirus engines yourself.
 - Block it in a firewall if you like — it never needs the internet.
+
+## How this was built (transparency)
+
+- **AI-assisted.** I designed and directed MouseTester — the measurement methodology, the "honest instrument" rules, what to measure and how to score it — and wrote the code with heavy help from an AI coding assistant. The design and testing decisions are mine; much of the code is AI-written. Saying so plainly because you deserve to know.
+- **Closed-source, by choice.** This repo is binary-only (README, license, notes, download). The source stays private for now — a deliberate choice, but honestly **it limits independent verification**: you can't read or rebuild the code.
+- **What the SHA-256 does and doesn't prove.** It only confirms your download matches the file I uploaded — it does **not** prove the program is safe, and without source you can't diff it against reviewable code. Treat it as "you got the right, untampered bytes," not "it's been audited."
+- **No git commit history here** because the repo is binary-only (the source history lives in a private repo). An empty-looking repo can read as sketchy — hence this section.
+
+So the strongest checks you have are the ones under [Is it safe?](#is-it-safe) above — scan it on VirusTotal, run it offline/firewalled, and note it makes no network calls and has no telemetry. Prefer open source or a signed build? Fair — both are on the list as the project earns trust.
 
 ## Status
 
