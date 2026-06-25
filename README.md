@@ -1,10 +1,12 @@
-# MouseTester
+# AleksMouseTester
 
 **A free Windows tool that measures how _evenly_ your mouse's input actually arrives at your PC — and is honest about what that means.**
 
-Most mouse testers show you a polling-rate number. MouseTester measures something different and more useful: the **timing of how raw mouse input is delivered to the Windows host** — how steady the intervals are, how often there are gaps or stutters, and which of *your* settings actually deliver cleanly on *your* machine.
+> *AleksMouseTester is an independent tool — **not affiliated with** the older "MouseTester" desktop app by microe1. It was renamed (from "MouseTester") specifically to make that distinction clear and avoid any confusion.*
 
-> **Honest by design.** MouseTester reports **Windows host raw-input delivery timing — not** physical USB/HID polling rate, **not** click-to-photon latency, **not** a verdict on your hardware. Results are correlations on your own PC, not proof of causation. When a measurement isn't trustworthy, the tool says so instead of glowing green.
+Most mouse testers show you a polling-rate number. AleksMouseTester measures something different and more useful: the **timing of how raw mouse input is delivered to the Windows host** — how steady the intervals are, how often there are gaps or stutters, and which of *your* settings actually deliver cleanly on *your* machine.
+
+> **Honest by design.** AleksMouseTester reports **Windows host raw-input delivery timing — not** physical USB/HID polling rate, **not** click-to-photon latency, **not** a verdict on your hardware. Results are correlations on your own PC, not proof of causation. When a measurement isn't trustworthy, the tool says so instead of glowing green.
 
 ## What it does
 
@@ -17,12 +19,12 @@ Most mouse testers show you a polling-rate number. MouseTester measures somethin
 
 > It doesn't reward the highest nominal polling rate. It rewards the highest rate that stays **stable** under real host delivery.
 
-An 8000 Hz mouse that delivers raggedly can score *below* a rock-steady 4000 Hz run — and MouseTester shows you why, with the numbers.
+An 8000 Hz mouse that delivers raggedly can score *below* a rock-steady 4000 Hz run — and AleksMouseTester shows you why, with the numbers.
 
 ## Download & run
 
-1. Grab the latest `MouseTester-vX.Y.Z-win-x64.zip` from [**Releases**](../../releases).
-2. Unzip (keep the whole folder) and run **`MouseTester.exe`**.
+1. Grab the latest `AleksMouseTester-vX.Y.Z-win-x64.zip` from [**Releases**](../../releases).
+2. Unzip (keep the whole folder) and run **`AleksMouseTester.exe`**.
 3. **Windows 10/11, 64-bit.** Self-contained — no .NET install needed.
 
 Verify your download against the `SHA256` value listed on the release.
@@ -33,7 +35,7 @@ Verify your download against the `SHA256` value listed on the release.
 
 Short version: yes — and you don't have to take my word for it.
 
-- **Why the SmartScreen warning?** MouseTester is a free tool I don't earn anything from, so it isn't code-signed (a signing certificate costs money and needs a registered company — not worth it for a free project). **Unsigned ≠ unsafe** — it only means Windows doesn't recognise the publisher yet. The warning fades as more people run it.
+- **Why the SmartScreen warning?** AleksMouseTester is a free tool I don't earn anything from, so it isn't code-signed (a signing certificate costs money and needs a registered company — not worth it for a free project). **Unsigned ≠ unsafe** — it only means Windows doesn't recognise the publisher yet. The warning fades as more people run it.
 - **No network, no telemetry.** It reads raw mouse input **locally** to measure timing — **nothing leaves your PC**, no internet calls, no tracking. Test history is stored only in your Documents folder.
 - **The optional power-saving changes** require **admin** (a UAC prompt), are shown to you first, and are fully **reversible** ("Restore settings"). Nothing changes unless you click.
 
@@ -44,7 +46,7 @@ Short version: yes — and you don't have to take my word for it.
 
 ## How this was built (transparency)
 
-- **AI-assisted.** I designed and directed MouseTester — the measurement methodology, the "honest instrument" rules, what to measure and how to score it — and wrote the code with heavy help from an AI coding assistant. The design and testing decisions are mine; much of the code is AI-written. Saying so plainly because you deserve to know.
+- **AI-assisted.** I designed and directed AleksMouseTester — the measurement methodology, the "honest instrument" rules, what to measure and how to score it — and wrote the code with heavy help from an AI coding assistant. The design and testing decisions are mine; much of the code is AI-written. Saying so plainly because you deserve to know.
 - **Closed-source, by choice.** This repo is binary-only (README, license, notes, download). The source stays private for now — a deliberate choice, but honestly **it limits independent verification**: you can't read or rebuild the code.
 - **What the SHA-256 does and doesn't prove.** It only confirms your download matches the file I uploaded — it does **not** prove the program is safe, and without source you can't diff it against reviewable code. Treat it as "you got the right, untampered bytes," not "it's been audited."
 - **No git commit history here** because the repo is binary-only (the source history lives in a private repo). An empty-looking repo can read as sketchy — hence this section.
@@ -61,4 +63,4 @@ Free to use. Binary-only release — see [LICENSE](LICENSE). Not open source.
 
 ---
 
-*MouseTester is a diagnostic instrument for host input-delivery timing — not a marketing-number generator.*
+*AleksMouseTester is a diagnostic instrument for host input-delivery timing — not a marketing-number generator.*
