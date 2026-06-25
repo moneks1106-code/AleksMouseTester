@@ -1,9 +1,9 @@
 ## AleksMouseTester v0.2.11
 
 ### Renamed: MouseTester → **AleksMouseTester**
-This project is now **AleksMouseTester**. Same tool, clearer name — so it's not confused with (and isn't "stealing the name of") the older, unrelated **MouseTester** desktop app by microe1. **AleksMouseTester is an independent project.**
+This project is now **AleksMouseTester** — an **independent** tool with its own focus: how *evenly* your mouse's input is actually delivered to the host (timing stability, honest validity flags, the highest *stable* rate as your sweet spot). The rename makes clear it is **not** the older, unrelated **MouseTester** by microe1 — and ends any "stealing the name" nonsense.
 
-- **No functional changes** from v0.2.10 — only the visible name (window/dialogs, the executable, this repo).
+- **Purely a name change from v0.2.10** — the measurement, scoring and features are unchanged; only the visible name moved (window/dialogs, the executable, this repo).
 - **Your saved history carries over.** The data folder is unchanged, so all your existing runs and settings are still there after updating.
 - The download is now `AleksMouseTester.exe` inside `AleksMouseTester-v0.2.11-win-x64.zip`.
 
