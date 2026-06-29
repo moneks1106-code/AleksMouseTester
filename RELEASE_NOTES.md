@@ -1,29 +1,23 @@
-## AleksMouseTester v0.2.11
+## AleksMouseTester v0.2.12 — clarity & honesty update
 
-### Renamed: MouseTester → **AleksMouseTester**
-This project is now **AleksMouseTester** — an **independent** tool with its own focus: how *evenly* your mouse's input is actually delivered to the host (timing stability, honest validity flags, the highest *stable* rate as your sweet spot). The rename makes clear it is **not** the older, unrelated **MouseTester** by microe1.
+The measurement, scoring and your saved history are unchanged. This update makes the results clearer and more honest.
 
-- **Purely a name change from v0.2.10** — the measurement, scoring and features are unchanged; only the visible name moved (window/dialogs, the executable, this repo).
-- **Your saved history carries over.** The data folder is unchanged, so all your existing runs and settings are still there after updating.
-- The download is now `AleksMouseTester.exe` inside `AleksMouseTester-v0.2.11-win-x64.zip`.
+### What's new
+- **Clearer Quick Test** — one **Start Quick Test** button, a plain-language result, and the measurement scope shown right at the result: what it measures (how *evenly* your mouse's input arrives at the Windows raw-input boundary) and what it does **not** (USB polling rate, sensor or firmware latency).
+- **Honest invalid runs** — a test with too few samples or a capture hiccup now shows **"—"** and *"couldn't be evaluated reliably"* instead of a misleading low score, in both the Quick Test result and your **Compare** history. (It could previously read as a scary "1.0".)
+- **Metric hover help** — hover any **Advanced / Lab** metric for a plain-language explanation.
+- **Less UI interference during capture** — reduced UI work while a test is running, so the app does less background drawing during measurement.
 
----
+Your saved runs and settings carry over unchanged.
 
-A free Windows tool that measures how **evenly** your mouse's input is delivered to the host — honest that this is host-delivery *timing*, not a device polling-rate or latency claim.
+### Download & integrity
+- `AleksMouseTester-v0.2.12-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed).
+- **SHA-256 of the `.zip`:** `402bf83fde9f0d8540910170cf8f076eab44dc8d703fcddaaee3dcd62bec2f76`
+- After unzipping, `SHA256SUMS.txt` (in this folder) lists the SHA-256 of every individual file, and `THIRD-PARTY-NOTICES.txt` lists the bundled open-source components.
 
-### Highlights
-- **Quick Test** with a plain-language delivery score
-- **Advanced / Lab** metrics + a live interval graph (double-click it for a labeled full-screen view)
-- **Compare** your runs, find your **stable sweet-spot rate** (the rate that's *consistently* clean, not the highest one that managed it once), and **double-click any run to reopen it** — values, ratings, and graphs
-- Optional **power-saving check / disable / restore** (reversible, admin-gated)
+This release is a **folder** (the `.exe` plus its files), not a single `.exe`. **Unzip and keep the whole folder together**, then run `AleksMouseTester.exe`.
 
-### Download
-- `AleksMouseTester-v0.2.11-win-x64.zip` — Windows 10/11 x64, self-contained (no .NET install needed)
-- SHA256: `b5f52377235100d302070f4c368d8af81abfbfadeb97d8095bf7d6021d40beed`
-
-Unzip (keep the whole folder) and run `AleksMouseTester.exe`.
-
-> Not code-signed yet — Windows SmartScreen may warn on first run ("More info" → "Run anyway"). See **How this was built** in the README for AI-assistance, closed-source status, and what the SHA-256 does and doesn't prove.
+> Not code-signed yet — Windows SmartScreen may warn on first run ("More info" → "Run anyway").
 
 ### Honest status
 Internally credible, **not yet validated across many mice / PCs**. Feedback from different hardware is very welcome.
