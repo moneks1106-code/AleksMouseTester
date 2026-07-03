@@ -13,7 +13,7 @@ Most mouse testers show you a polling-rate number. AleksMouseTester measures som
 - **Quick Test** — move the mouse for a few seconds, get a plain-language delivery score.
 - **Advanced / Lab** — the full metric breakdown (jitter, worst gap, stutters, batching, on-target share…), a live interval graph (**double-click it for a full-screen view** with zoom + labeled axes; Esc closes), and the raw numbers behind the score.
 - **Compare** — every run is saved locally and ranked, so you can find your **sweet spot: the highest rate that still delivers cleanly** (higher Hz isn't automatically better). **Double-click any run to reopen it** — its values, ratings, and graphs. Testing several USB ports? Compare them side by side.
-- **Power-saving check** — optionally scan the Windows power-saving settings that can interrupt input delivery (USB selective suspend, CPU states, per-device USB power management) and switch them to max performance — fully reversible.
+- **Power-saving check** — optionally scan the Windows power-saving settings that can interrupt input delivery (USB selective suspend, CPU states, per-device USB power management) and switch them to max performance — fully reversible: the first change takes an immutable restore point of your original values (AC **and** battery), and every restore is verified by reading the values back.
 
 ## The core idea
 
@@ -36,11 +36,13 @@ Verify your download against the `SHA256` value listed on the release.
 Short version: yes — and you don't have to take my word for it.
 
 - **Why the SmartScreen warning?** AleksMouseTester is a free tool I don't earn anything from, so it isn't code-signed (a signing certificate costs money and needs a registered company — not worth it for a free project). **Unsigned ≠ unsafe** — it only means Windows doesn't recognise the publisher yet. The warning fades as more people run it.
-- **No network, no telemetry.** It reads raw mouse input **locally** to measure timing — **nothing leaves your PC**, no internet calls, no tracking. Test history is stored only in your Documents folder.
+- **No network, no telemetry.** It reads raw mouse input **locally** to measure timing — **nothing leaves your PC**, no internet calls, no tracking. Test history is stored only in your Documents folder, plus a small **local** error log (`%LocalAppData%\MouseTester\logs`) so crashes can be diagnosed — it never leaves your machine either.
 - **The optional power-saving changes** require **admin** (a UAC prompt), are shown to you first, and are fully **reversible** ("Restore settings"). Nothing changes unless you click.
 
 **Don't trust me — verify:**
 - Check the download's **SHA256** matches the release — it confirms you got my exact, untampered file (for what the hash *can't* prove, see [How this was built](#how-this-was-built-transparency)).
+- After unzipping, verify **every individual file**: `sha256sum -c SHA256SUMS.txt` (standard format — works in git-bash/WSL out of the box).
+- `BUILDINFO.txt` in the folder records the exact source commit, build flavor, and the pinned obfuscation-tool version the build used.
 - Drag the `.zip` onto [**VirusTotal**](https://www.virustotal.com) to scan it with 70+ antivirus engines yourself.
 - Block it in a firewall if you like — it never needs the internet.
 
