@@ -34,8 +34,50 @@ working.*
   disagree on validity.
 - A score value is never emitted for an invalid run; consumers must treat an empty
   `delivery_score` + non-`Valid` `score_status` as "not evaluable", not as zero.
+- `drain_errors` retains its legacy column name and, since v0.2.15, counts native read failures
+  from both the current `GetRawInputData` event and `GetRawInputBuffer` drains.
+  `corrupt_headers` includes malformed current-event records. Successfully read
+  non-mouse events are intentionally skipped and do not increment either counter.
+  Either nonzero counter uses the existing capture-integrity validity gate; the
+  score formula and schema version remain unchanged.
+
+## Session JSON — `systemContext` inventory fields (added in v0.2.15, `schema_version` stays 4)
+
+The saved session JSON (`systemContext`, captured on a background thread and never while a
+measurement runs) gained seven **additive, nullable** members. Absent = not captured, never
+"off"; every member carries a `Provenance` entry (`ReadOk` / `Unknown`), and
+`AutoCaptureSchemaVersion` stays `1`. They are **inventory** for telling runs apart after the
+fact — nothing in the score or its validity rules reads them, and Compare does not use them to
+group runs; Energy Saver and battery state appear there only as notes.
+
+| member | source | notes |
+|---|---|---|
+| `VbsConfigured` | `HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\EnableVirtualizationBasedSecurity` | **configured**, not proven running |
+| `HvciConfigured` | `…\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity\Enabled` | Memory Integrity as configured, not proven running |
+| *(HvciRunning)* | — | **deliberately not captured**: reading the running state would need a WMI query or a helper process while probing, which the app avoids |
+| `EnergySaverActive` | `SYSTEM_POWER_STATUS.SystemStatusFlag` bit 0 | state at probe time; can be on while on AC since 24H2 |
+| `OnBattery` | `SYSTEM_POWER_STATUS.ACLineStatus` | `0` → `true`, `1` → `false`, `255` (unknown) → absent |
+| `ProcessArchitecture` | `RuntimeInformation.ProcessArchitecture` | e.g. `X64` |
+| `OsArchitecture` | `RuntimeInformation.OSArchitecture` | native machine, e.g. `Arm64` |
+| `IsEmulated` | `ProcessArchitecture != OsArchitecture` | `true` = the x64 build ran under emulation on an ARM64 host |
+
+The same seven values appear as rows in the reference-bundle Markdown report (empty cell = not
+captured). They are **not** in `_metrics.csv`: by this document's own convention an appended column
+is a schema bump (2 → 3 did exactly that), so the CSV stays at schema 3, byte-identical.
+
+## Session JSON — run field `preRollMs` (added in v0.2.15, `schema_version` stays 4)
+
+Each quick-test run in the session JSON carries `preRollMs`: the length of the **discarded warm-up**
+that ran right before the scored window, in milliseconds (500 since v0.2.15). The capture already
+runs during the warm-up, and everything captured in it is thrown away at one atomic boundary; the
+run's duration, samples and metrics all start at that boundary. Absent on runs saved before v0.2.15,
+which had no warm-up. Provenance only — nothing in the score or its validity rules reads it. It is
+**not** a `_metrics.csv` column (no schema bump).
 
 ## Changelog
+- **3, unchanged (v0.2.15)** — VBS/HVCI/Energy-Saver/architecture context added to the session JSON
+  `systemContext` only (section above); no CSV column appended, no bump. `drain_errors` also counts
+  native read failures (see *Semantics guarantees*). Runs record `preRollMs` in the session JSON.
 - **3** — appended tail metrics, score + validity + algorithm-version provenance, and the raw
   per-device observation. (Before 3, the score existed only in the session JSON and the CSV carried
   no tail columns.)
