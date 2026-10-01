@@ -1,3 +1,125 @@
+## AleksMouseTester v0.2.15 — Delta View & clearer scores
+
+**Honesty release. No change to the score formula. Existing sessions remain
+fully compatible.**
+
+This release shows more of what was measured and says more plainly why a
+number is what it is: a new Delta View tab, a main graph that keeps every
+spike, a Compare recommendation built only from comparable runs, and a score
+breakdown that names the cap holding a score down. The first quick test after
+starting the app now starts clean, too. If your scores differ from before, it
+is not the formula.
+
+### New
+
+- **Delta View tab.** Shows the last completed or loaded run report by report:
+  mouse movement (dX/dY) and the interval between reports on one shared,
+  zoomable time axis. Reports that arrived buffered or with a shared timestamp
+  are marked. The tab states whether the run is valid (red banner for an
+  invalid run, amber for read errors) and says "full captured reports" only
+  when no read errors or corrupt records occurred. It shows what arrived and
+  when — it cannot tell a pause of your hand from a stall on the PC. It is
+  disabled while a test runs and only does its work when you open it.
+- **The app names the cap that holds a score.** When the delivery number sits
+  exactly at one of the scoring caps, the score breakdown says so under
+  *Delivery quality* — for example "limited by timing reliability (max batch
+  5)" — and the Delivery tooltip in Compare explains that the number shown is
+  that cap's value, not the weighted average of the metrics. A score that
+  looks oddly round now tells you which single finding put it there.
+- **More context in saved runs.** Session files now also record whether VBS
+  and Memory Integrity are configured, whether Energy Saver was on, battery
+  or AC power, and the process and OS architecture (see EXPORT_SCHEMA.md).
+  None of these feed the score.
+
+### Changed
+
+- **Compare recommends only from comparable runs.** The sweet-spot
+  recommendation used to pool every scorable run. It now uses only runs
+  recorded with the currently selected mouse, DPI, USB port, power plan,
+  Windows version, CPU, test protocol and duration. Other runs stay listed
+  but dimmed, and the summary says how many runs were compared, how many were
+  left out and why. Monthly Windows updates don't split your history; a
+  feature update (for example 25H2 to 26H2) starts a new comparison group. If
+  there isn't enough clean evidence, Compare says so instead of guessing.
+- **Runs this version can't re-score stay untouched.** A run saved by a newer
+  version, or by an old one without the needed metrics, is shown as Legacy with
+  the reason — in Basic, Compare, Delta View and the exported report — instead
+  of being re-scored under this version's formula.
+
+### Fixed
+
+- **The first quick test after starting the app starts clean.** It used to
+  begin with one burst of buffered reports, mostly at 8000 Hz, because the app
+  set up its measurement buffer at exactly that moment; the score then showed
+  "limited by timing reliability". The buffer is now prepared when the app
+  starts, and every quick test begins with a short warm-up that is discarded
+  before the measured window — so a test takes half a second longer.
+- **The main graph no longer hides spikes.** At high polling rates the graph
+  drew only every Nth point, so a single long gap — or a single invalid report
+  among tens of thousands — could vanish from the picture. Each pixel column
+  now draws its highest and lowest value and any invalid report. Loading a run
+  or switching a preset resets the zoom, so the "▲ N above …" note is never
+  silently off.
+- **The Timing Distribution histogram shows its peak again.** The outlier
+  clamp added in v0.2.14 for line graphs was also applied to the histogram and
+  cut almost every distribution off at 8 counts — the peak, i.e. the picture
+  itself. Line graphs keep the clamp; the histogram no longer has it.
+- **No stale numbers after Clear, cancel or a failed test.** Clear, a manual
+  start, a cancelled and a failed test now reset every frozen display together
+  — score, breakdown, headline, status, tiles and Delta View. After a cancel
+  or failure the partial data is discarded instead of showing up as live
+  numbers on Advanced.
+- **Lost input data invalidates a run.** If reading raw input from Windows
+  fails during a test, or a record arrives corrupted, the run is marked
+  invalid instead of being scored as if nothing was lost.
+- **Saved runs keep their own identity.** Exports use the finished run's mouse,
+  labels, protocol and timestamps — typing into the fields afterwards no
+  longer renames an old measurement. Viewing a saved run shows "Loaded <time>
+  · <duration>" with that run's own verdict instead of the previous run's
+  status line.
+- **The diagnosis agrees with the score.** Diagnosis and recommendation are
+  built from the same findings as the score, so a Limited run no longer gets a
+  contradictory "stable" statement.
+- **The reported rate is read safely.** The "N Hz reported" value is read with
+  size and type checks and shows 0 (unknown) when Windows doesn't provide it,
+  instead of an undefined value.
+- **Compare's summary fits its text.** The summary above the run table now
+  grows with its text instead of sitting in a fixed-height row, so it is no
+  longer cut off on narrow windows or with display scaling.
+- **The power tweak checks before it writes.** Every planned change is checked
+  against the restore point before the first write; if any original value is
+  missing, nothing is changed.
+
+### Improved
+
+- **A running test is protected.** Clear, device changes and restarts are
+  blocked until the test has ended, and a cancelled or too-short run is never
+  saved as a complete one.
+- **A stopped manual capture says so.** The header shows that the capture has
+  ended, how many reports it holds and how long it ran, and whether any reports
+  were lost.
+- **Windows PowerShell is started from its fixed system location.** The
+  per-mouse USB power-saving switch no longer looks PowerShell up on the
+  search path; if it is missing, nothing is changed and the state shows as
+  unknown.
+- **README:** clearer notes on SmartScreen, Smart App Control, which parts of
+  the power tweak ask for administrator rights, and supported platforms.
+
+### Unchanged on purpose
+
+- Scoring formula, thresholds and rating classes
+- Session format (schema 4, plus the optional context fields and the recorded
+  warm-up length) and CSV export (schema 3). The CSV column `drain_errors` now
+  also counts native read failures — see EXPORT_SCHEMA.md.
+- Windows 10 22H2 / Windows 11, x64, self-contained (the .NET 8 runtime is
+  included). Microsoft ends .NET 8 support on 10 November 2026; the move to
+  .NET 10 will be its own release.
+- Still unsigned (SmartScreen may warn — verify the SHA-256 on the release page)
+
+Verify the download: the zip's SHA-256 is on this release page; inside the zip,
+`SHA256SUMS.txt` lets you check every file (`sha256sum -c SHA256SUMS.txt`), and
+`BUILDINFO.txt` now also names the .NET SDK and the bundled runtime version.
+
 ## AleksMouseTester v0.2.14 — stability & integrity
 
 **Reliability release. No scoring changes. No file-format changes. Existing
