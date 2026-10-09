@@ -1,3 +1,82 @@
+## AleksMouseTester v0.2.16 — Quiet measurement & .NET 10
+
+**Measurement release. No change to the score formula. Existing sessions remain
+fully compatible.**
+
+The quick test used to disturb its own measurement. While it ran, the app kept
+updating its window, and from the second test after starting the app those
+updates showed up in the report timing as extra gaps — at 8000 Hz often enough
+to cost several points. Now nothing in the app changes while it measures. If
+your follow-up runs used to score lower than the first run after starting the
+app, measure again. The app also moves to .NET 10, because Microsoft ends
+support for .NET 8 on 10 November 2026.
+
+### Fixed
+
+- **The quick test no longer disturbs its own measurement.** The app updated
+  its progress, status line and live numbers several times a second during a
+  test. From the second test after starting the app, the timing showed extra
+  gaps at exactly that rhythm. Now the window does not change while the test
+  measures, the periodic refresh pauses, and the app holds off its own memory
+  cleanup until the test has ended. Measured on my PC with an 8000 Hz mouse:
+  follow-up runs had 215–265 gaps per 10 s with v0.2.15 and mostly scored
+  6.5–7.0; with this version six runs had 1–29 gaps and scored 9.9–10.0. Your
+  numbers depend on your mouse and PC.
+- **No burst of gaps at the start of a test.** Switching the screen and
+  cleaning up memory right before the measurement left a short burst of gaps
+  in the first two seconds of some runs. Both now happen during the countdown.
+- **The graph stays out of the way during a capture.** It no longer takes focus
+  when the pointer passes over it and no longer opens full screen on a
+  double-click until the capture has ended.
+
+### New
+
+- **Measurement screen.** A quick test now covers the whole window: "GET READY"
+  with a three-second countdown (start moving), then "MEASUREMENT RUNNING"
+  until the screen disappears, then a green "DONE" for a moment before the
+  result appears. The screen does not change while the test measures — a
+  progress bar on it was tried and measurably added gaps — so its
+  disappearance is your signal to stop. Esc cancels the test, since the Stop
+  buttons are covered.
+- **`gcInWindow` in saved runs.** Each quick-test run records how often the
+  tester's own memory cleanup ran during the measurement (expected 0; see
+  EXPORT_SCHEMA.md). It is not part of the score.
+
+### Changed
+
+- **.NET 10.** The app now brings .NET 10 (long-term support until November
+  2028) instead of .NET 8. The download is smaller — about 48 MB instead of
+  67 MB — because unused framework parts and translations are no longer
+  included. Re-scoring the stored metrics of 241 saved runs gives identical
+  results on .NET 8 and .NET 10.
+- **Supported Windows.** Microsoft supports .NET 10 on Windows 11 24H2 and
+  newer. The app is expected to run on older Windows 11 versions and on
+  Windows 10 22H2, but it is untested and unsupported there.
+
+### Good to know
+
+- **Move in circles.** When you swipe left–right or back and forth, the mouse
+  stops at every turning point. Those pauses show up as gaps: two swipe runs on
+  my PC scored 4.5 where circles scored 9.8–9.9.
+- **If the app closes right after starting:** since .NET 9, Windows' hardware
+  stack protection (CET) is on for .NET apps. Third-party software that injects
+  incompatible code into other programs (some overlays or older security
+  tools) can make the app close. If that happens, please open an issue and
+  name the software.
+
+### Unchanged on purpose
+
+- Scoring formula, thresholds and rating classes
+- Session format (schema 4, plus the optional `gcInWindow` field) and CSV
+  export (schema 3) — see EXPORT_SCHEMA.md
+- x64, self-contained (the .NET 10 runtime is included — nothing to install)
+- Still unsigned (SmartScreen may warn — verify the SHA-256 on the release page)
+
+Verify the download: the zip's SHA-256 is on this release page; inside the zip,
+`SHA256SUMS.txt` lets you check every file (`sha256sum -c SHA256SUMS.txt`), and
+`BUILDINFO.txt` names the source commit, the .NET SDK and the bundled runtime
+version.
+
 ## AleksMouseTester v0.2.15 — Delta View & clearer scores
 
 **Honesty release. No change to the score formula. Existing sessions remain
