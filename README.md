@@ -26,7 +26,7 @@ An 8000 Hz mouse that delivers raggedly can score *below* a rock-steady 4000 Hz 
 
 1. Grab the latest `AleksMouseTester-vX.Y.Z-win-x64.zip` from [**Releases**](../../releases).
 2. Unzip (keep the whole folder) and run **`AleksMouseTester.exe`**.
-3. **Windows 10 22H2 / Windows 11, x64.** Self-contained — no .NET install needed. On Windows 11 on Arm devices the x64 build runs under Windows' x64 emulation — it has **not** been validated there. Note that Windows 10 reached Microsoft's end of support in October 2025.
+3. **Windows 11, x64.** Self-contained — no .NET install needed (it brings its own .NET 10, which Microsoft supports on Windows 11 24H2 and newer). Older Windows 11 versions and Windows 10 22H2 are past Microsoft's end of support: the app is expected to run there, but it is untested and unsupported on them. On Windows 11 on Arm devices the x64 build runs under Windows' x64 emulation — it has **not** been validated there.
 
 Verify your download against the `SHA256` value listed on the release.
 
