@@ -74,7 +74,18 @@ run's duration, samples and metrics all start at that boundary. Absent on runs s
 which had no warm-up. Provenance only — nothing in the score or its validity rules reads it. It is
 **not** a `_metrics.csv` column (no schema bump).
 
+## Session JSON — run field `gcInWindow` (added in v0.2.16, `schema_version` stays 4)
+
+Each quick-test run carries `gcInWindow`: how many garbage collections **the tester's own process** ran
+during the scored window. Every collection briefly pauses all of the tester's threads, including the one
+that receives the mouse reports, so it is an observer effect of the tool, not of your system. Since
+v0.2.16 a quick test asks the .NET runtime not to collect at all while it measures, so the expected value
+is `0`; a higher value says that request could not be kept for that run. Absent on runs saved before
+v0.2.16. Provenance only — nothing in the score or its validity rules reads it. Not a `_metrics.csv`
+column (no schema bump).
+
 ## Changelog
+- **3, unchanged (v0.2.16)** — runs record `gcInWindow` in the session JSON (section above).
 - **3, unchanged (v0.2.15)** — VBS/HVCI/Energy-Saver/architecture context added to the session JSON
   `systemContext` only (section above); no CSV column appended, no bump. `drain_errors` also counts
   native read failures (see *Semantics guarantees*). Runs record `preRollMs` in the session JSON.
