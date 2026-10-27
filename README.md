@@ -4,6 +4,8 @@
 
 ### ➡️ [Download InputLab](https://github.com/moneks1106-code/InputLab/releases/latest)
 
+### 💬 [Join the InputLab Discord](https://discord.gg/3kEktvD4zm)
+
 ## Everything from AleksMouseTester, in InputLab
 
 - The mouse quick test with its delivery score, now fairer for new runs (score v2): a gap where you moved too slowly for your rate and DPI no longer counts against the mouse.
